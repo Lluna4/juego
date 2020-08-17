@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CapsuleMesh" id=4]
+
+[sub_resource type="CapsuleShape" id=5]
+radius = 1.09771
+
+[node name="enemigo" type="StaticBody" groups=[
+"enemigos",
+]]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.56483, 0.016083, 4.20501 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.48773, 0.0481905, 4.23504 )
+shape = SubResource( 5 )
