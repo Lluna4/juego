@@ -1,12 +1,15 @@
 extends KinematicBody
-
+class_name jugador
 export var velocidad = 30
 export var aceleracion = 5
 export var gravedad = 0.95
 export var fuerza_de_salto = 30
 export var sensibilidad = 0.3
+export var mana = 100
+export var almas = 0
+export var tiempo_recoil = 0.3
 var rotacion_y = 0
-
+onready var arma = $arma
 onready var cabeza = $cabeza
 onready var camara = $cabeza/Camera
 
@@ -49,4 +52,4 @@ func _physics_process(delta: float) -> void:
 		velocidad_maxima.y += fuerza_de_salto
 	direccion = direccion.normalized()
 	
-	
+

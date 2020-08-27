@@ -1,0 +1,14 @@
+[remap]
+
+importer="Vox.Importer"
+type="Mesh"
+path="res://.import/untitled.vox-cc086142f7c9aab49b96ec63842b37c2.mesh"
+
+[deps]
+
+source_file="res://untitled.vox"
+dest_files=[ "res://.import/untitled.vox-cc086142f7c9aab49b96ec63842b37c2.mesh" ]
+
+[params]
+
+Scale=0.1
