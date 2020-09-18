@@ -8,19 +8,26 @@ export var sensibilidad = 0.3
 export var mana = 100
 export var almas = 0
 export var tiempo_recoil = 0.3
+
 var rotacion_y = 0
+const movimiento_arma = 30
+
 onready var arma = $arma
 onready var cabeza = $cabeza
 onready var camara = $cabeza/Camera
+onready var pistola = $cabeza/mano/arma
+onready var mano = $cabeza/mano
+onready var headloc = $cabeza/headloc
+onready var kunai = preload("res://kunai (test).tscn")
 
 var velocidad_maxima = Vector3()
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _process(delta: float) -> void:
 	
-	if Input.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+
+	
 	
 
 func _input(event: InputEvent) -> void:

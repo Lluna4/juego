@@ -15,7 +15,7 @@ _global_script_classes=[ {
 "path": "res://items.gd"
 }, {
 "base": "Node",
-"class": "arma",
+"class": "arma1",
 "language": "GDScript",
 "path": "res://arma.gd"
 }, {
@@ -31,7 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ITEMS": "",
-"arma": "",
+"arma1": "",
 "interactuable": "",
 "jugador": ""
 }
@@ -45,6 +45,12 @@ config/icon="res://icon.png"
 [autoload]
 
 DatosIteam="*res://datos/datosIteam.gd"
+
+[display]
+
+window/size/width=1360
+window/size/height=768
+window/size/fullscreen=true
 
 [editor_plugins]
 
@@ -85,6 +91,11 @@ disparo={
 recarga={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"tirar habilidad"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }
 
