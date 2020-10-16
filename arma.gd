@@ -32,12 +32,31 @@ var disparos_seguidos = 0 #parte del sistema de XP, no funciona (de momento)
 var rng = RandomNumberGenerator.new() #genera numero aleatorio
 var balas_ui_recursos = [balas, balas_cargador] #carga las cosas que se muestran en pantalla (relacionado con las balas)
 
+export var nivel_oxigeno = 100
+export var regen_oxigeno = 3.6
+
 var xp = 0
 var xp_siguiente_lvl2 = 65   #SISTEMA XP, NO FUNCIONA (DE MOMENTO)
 var xp_siguiente_lvl3 = 150
 var xp_siguiente_lvl4 = 245
 var xp_siguiente_lvl5 = 365
 var nivel = 1
+
+
+func oxigeno():
+	if nivel_oxigeno < 100:
+		yield(get_tree().create_timer(1), "timeout")
+		nivel_oxigeno += regen_oxigeno
+		print("oxigeno", nivel_oxigeno)
+	if nivel_oxigeno <= 0:
+		nivel_oxigeno = 0
+	if nivel_oxigeno == 10:
+		se_puede_disparar = false
+		print("no hay oxigeno para disparar!")
+	elif nivel_oxigeno > 100:
+		nivel_oxigeno = 100
+	else:
+		se_puede_disparar = true
 
 
 
@@ -50,12 +69,15 @@ func _process(delta: float) -> void:
 #		balas_ui.set_text("Demasiado recoil!")
 	else:
 		balas_ui.set_text("BALAS: %d / %d" % [balas, balas_cargador]) #pone en pantalla las balas y las balas maximas del cargador
-	
+	oxigeno()
 	
 
 	if Input.is_action_just_pressed("disparo") and se_puede_disparar: #si se presiona el boton de disparar (click izquierdo) dispara si las balas son mas que 0, sino recarga
 		if balas > 0 and not recargando:
 			disparo()
+			nivel_oxigeno -= 10
+			print("oxigeno", nivel_oxigeno)
+			
 		elif not recargando:
 			recarga()
 		
