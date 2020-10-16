@@ -79,28 +79,29 @@ func revisar_colision():
 	 
 	if raycast.is_colliding():  #tira un rayo desde el centro de la pantalla y revisa si le ha dado a algo
 		vida_enemigo -= damage_bala #le quita al enemigo el daño de la bala
-		print("vida ",vida_enemigo)
-		var collider = raycast.get_collider()
+		print("vida ",vida_enemigo) #para ver si de verdad le quito vida o no, ya que estaba bug
+		var collider = raycast.get_collider() #le pide al rayo que diga en que ha impactado (si ha impactado)
 		
-		print("GOLPEADO " + collider.name)
-		xp = xp + 5
+		print("GOLPEADO " + collider.name) #si ha golpeado un enemigo, dice en la consola a quien a golpeado
+		xp = xp + 5 # cada vez que le da a alguien le da 5 de xp al jugador
 		 
-		print(xp)
-		if vida_enemigo <= 0:
+		print(xp) #para saber si la XP funciona
+		if vida_enemigo <= 0: #mata al enemigo si llega 0 la vida
 			
-			collider.queue_free()
-			yield(get_tree().create_timer(tiempo_recarga), "timeout")
-			var enemigo = preload("res://enemigo.tscn").instance()
-			rng.randomize()
-			var my_random_number = rng.randf_range(-25, 25)
-			enemigo.translation = Vector3 (my_random_number, 0, my_random_number)
-			add_child(enemigo)
-			vida_enemigo = vida_maxima_enemigo
-
-func disparo():
-#	 if disparos_seguidos == 3 and nivel == 1:
+			collider.queue_free() #elimina al enemigo,simplemente despareze
+			yield(get_tree().create_timer(tiempo_recarga), "timeout") #cooldown para el respawn de los enemigos
+			var enemigo = preload("res://enemigo.tscn").instance() # crea otro enemigo
+			rng.randomize() # crea un numero aleatorio
+			var my_random_number = rng.randf_range(-25, 25) #los valores entre los que tine que estar el numero aleatrio
+			var my_random_number2 = rng.randf_range(-25, 25) 
+			enemigo.translation = Vector3 (my_random_number, 0, my_random_number2) #tpea el enemigo a una posicion random
+			add_child(enemigo) #genera el enemigo
+			vida_enemigo = vida_maxima_enemigo #hace que el enemigo recupere su vida, ya que ha respawnado
+ 
+func disparo(): 
+#	 if disparos_seguidos == 3 and nivel == 1:   SISTEMA XP ROTO
 #		print("demasiado recolil")
-#		se_puede_disparar = false
+#		se_puede_disparar = false   
 #		en_dolor_recoil = true
 #		yield(get_tree().create_timer(tiempo_recoil_lvl1), "timeout")
 #		en_dolor_recoil = false
@@ -150,29 +151,29 @@ func disparo():
 	
 	
 	
-	disparos_seguidos = disparos_seguidos + F
-	print("BANG!")
-	se_puede_disparar = false     
-	balas -= 1
-	#recoil_animacion.play("recoil")
+	disparos_seguidos = disparos_seguidos + F #NO SIRVE PARA NADA (DE MOMENTO)
+	print("BANG!") #para saber si he disparado o no, ya que habian bugs
+	se_puede_disparar = false  #La arma acaba de disparar asi que no puede (de momento)  
+	balas -= 1 # resta la bala que se ha gastado en el disparo
+	#recoil_animacion.play("recoil") ROTO, LA ANIMACION QUE HIZE ES PESIMA
 	
-	revisar_colision()
-	yield(get_tree().create_timer(velocidad_disparo), "timeout")
-	se_puede_disparar = true
+	revisar_colision() #La anterior funcion, la cual revisava si el rayo daba a alguien
+	yield(get_tree().create_timer(velocidad_disparo), "timeout") # espera el tiempo que necesita el arma 
+	se_puede_disparar = true # el tiempo ha acabado asi que ya se puede disparar
 	
 	
 	
 
-func recarga():
-	print("Recargando")
-	recargando = true         
-	yield(get_tree().create_timer(tiempo_recarga), "timeout")
-	recargando = false
-	balas = balas_cargador
-	print("Recarga completada")
+func recarga(): 
+	print("Recargando") #para saber si funciona 
+	recargando = true    #marca que el personaje esta recargando     
+	yield(get_tree().create_timer(tiempo_recarga), "timeout") #el tiempo de recarga
+	recargando = false #cuando acaba el tiempo, obviamente ya no esta recargando
+	balas = balas_cargador #El cargador vuelve a rellenarse asi que las balas son las maximas que permite el cargador
+	print("Recarga completada") #para saber si funciona
 
 #func habilidad():
-#	if Input.is_action_pressed("tirar habilidad"):
+#	if Input.is_action_pressed("tirar habilidad"): ROTO
 #		if raycast.is_colliding():
 #			var b = kunai.instance()
 #			mano.add_child(b)
