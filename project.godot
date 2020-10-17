@@ -46,6 +46,11 @@ config/icon="res://icon.png"
 
 DatosIteam="*res://datos/datosIteam.gd"
 
+[debug]
+
+settings/gdscript/max_call_stack=100000
+settings/visual_script/max_call_stack=100000
+
 [display]
 
 window/size/width=1360

@@ -118,3 +118,15 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="oxigeno" type="Label" parent="algo"]
+margin_left = 47.9458
+margin_top = 8.98984
+margin_right = 196.946
+margin_bottom = 74.9898
+text = "nivel de oxigeno 100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

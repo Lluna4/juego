@@ -7,6 +7,7 @@ export var tiempo_recarga = 1
 export var respawn_s = 3
 export var tiempo_kunai = 10
 var F = 1
+var poco_oxigeno = false
 #var tiempo_recoil_lvl1 = 1.5    DE MOMENTO NO FUNCIONA
 #var tiempo_recoil_lvl2 = 1.0
 #var tiempo_recoil_lvl3 = 1.2
@@ -19,9 +20,10 @@ onready var balas_ui = $"/root/mundo/algo/balas" #lo mismo que lo de la xp pero 
 onready var enemigo_cargado = $"/root/mundo/enemigo" #carga el modelo del enemigo
 onready var cabeza = $"../cabeza" #carga la cabeza (que incluye la camara, la mano, el arma, el sistema de disparo)
 onready var xp_ui = $"/root/mundo/algo/xp" #carga el texto en pantalla de los puntos de xp
+onready var oxigeno_ui = $"/root/mundo/algo/oxigeno"
 #onready var kunai = preload("res://kunaibeta.tscn") ROTO
 onready var mano = $"../mano" #carga la mano (sistema disparo, modelo arma)
-
+var tiempo_regen_oxigeno = 1
 var balas = balas_cargador #iguala las balas a las balas del cargador, porque al principio del todo las balas son las mismas que la capacidad del cargador 
 var vida_maxima_enemigo = 100 
 var vida_enemigo = vida_maxima_enemigo #lo mismo que las balas
@@ -31,9 +33,9 @@ var recargando = false
 var disparos_seguidos = 0 #parte del sistema de XP, no funciona (de momento)
 var rng = RandomNumberGenerator.new() #genera numero aleatorio
 var balas_ui_recursos = [balas, balas_cargador] #carga las cosas que se muestran en pantalla (relacionado con las balas)
-
-export var nivel_oxigeno = 100
-export var regen_oxigeno = 3.6
+export var nivel_oxigeno_max = 100
+var nivel_oxigeno = nivel_oxigeno_max
+export var regen_oxigeno = 5.6
 
 var xp = 0
 var xp_siguiente_lvl2 = 65   #SISTEMA XP, NO FUNCIONA (DE MOMENTO)
@@ -43,19 +45,22 @@ var xp_siguiente_lvl5 = 365
 var nivel = 1
 
 
-func oxigeno():
+func oxigeno(InDelta):
 	if nivel_oxigeno < 100:
-		yield(get_tree().create_timer(1), "timeout")
-		nivel_oxigeno += regen_oxigeno
-		print("oxigeno", nivel_oxigeno)
+		
+		nivel_oxigeno += regen_oxigeno*InDelta
+		nivel_oxigeno = min(nivel_oxigeno, nivel_oxigeno_max)
+		
 	if nivel_oxigeno <= 0:
 		nivel_oxigeno = 0
-	if nivel_oxigeno == 10:
+	if nivel_oxigeno <= 10:
+		poco_oxigeno = true
 		se_puede_disparar = false
-		print("no hay oxigeno para disparar!")
+		print("no hay oxigeno para disparar!", nivel_oxigeno)
 	elif nivel_oxigeno > 100:
 		nivel_oxigeno = 100
 	else:
+		poco_oxigeno = false
 		se_puede_disparar = true
 
 
@@ -69,14 +74,18 @@ func _process(delta: float) -> void:
 #		balas_ui.set_text("Demasiado recoil!")
 	else:
 		balas_ui.set_text("BALAS: %d / %d" % [balas, balas_cargador]) #pone en pantalla las balas y las balas maximas del cargador
-	oxigeno()
+	if poco_oxigeno == true:
+		oxigeno_ui.set_text("DEMASIADO POCO OXIGENO")
+	else:
+		oxigeno_ui.set_text("NIVEL DE OXIGENO: %d" %nivel_oxigeno)
+		
 	
 
 	if Input.is_action_just_pressed("disparo") and se_puede_disparar: #si se presiona el boton de disparar (click izquierdo) dispara si las balas son mas que 0, sino recarga
 		if balas > 0 and not recargando:
 			disparo()
-			nivel_oxigeno -= 10
-			print("oxigeno", nivel_oxigeno)
+			nivel_oxigeno -= 5
+			
 			
 		elif not recargando:
 			recarga()
@@ -95,7 +104,7 @@ func _process(delta: float) -> void:
 	if xp >= xp_siguiente_lvl5:
 		nivel = 5
 		print(nivel)
-	
+	oxigeno(delta)
 	
 func revisar_colision():
 	 

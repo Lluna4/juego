@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://juagdor.gd" type="Script" id=1]
 [ext_resource path="res://arma.gd" type="Script" id=2]
-[ext_resource path="res://untitled.vox" type="ArrayMesh" id=3]
+[ext_resource path="res://mano.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mira.png" type="Texture" id=4]
-[ext_resource path="res://kunai (test).tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "recoil"
@@ -22,7 +21,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0.00983763, 0.322093, 0 ), Vector3( 0.01, 0.63, 0 ), Vector3( 0.00983763, 0.322093, 0 ) ]
 }
 
-[sub_resource type="CapsuleShape" id=5]
+[sub_resource type="CapsuleShape" id=2]
 
 [node name="juagdor" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -54,22 +53,14 @@ __meta__ = {
 [node name="recoil" type="AnimationPlayer" parent="cabeza/Camera"]
 anims/recoil = SubResource( 1 )
 
-[node name="mano" type="Spatial" parent="cabeza/Camera"]
-
-[node name="arma" type="MeshInstance" parent="cabeza/Camera/mano"]
-transform = Transform( -0.499588, 0, 0.0202925, 0, 0.5, 0, -0.0202925, 0, -0.499588, 0.35, -1.2, -0.5 )
-mesh = ExtResource( 3 )
-material/0 = null
-
-[node name="kunai (test)" parent="cabeza/Camera" instance=ExtResource( 5 )]
-collision_layer = 0
+[node name="mano" parent="cabeza/Camera" instance=ExtResource( 3 )]
 
 [node name="headloc" type="Spatial" parent="cabeza"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610423, -0.173774, -1.39435 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.37242, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="arma" type="Node" parent="."]
 script = ExtResource( 2 )

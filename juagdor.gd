@@ -9,6 +9,7 @@ export var mana = 100
 export var almas = 0
 export var tiempo_recoil = 0.3
 
+
 var rotacion_y = 0
 const movimiento_arma = 30
 
@@ -18,9 +19,17 @@ onready var camara = $cabeza/Camera
 onready var pistola = $cabeza/mano/arma
 onready var mano = $cabeza/mano
 onready var headloc = $cabeza/headloc
-onready var kunai = preload("res://kunai (test).tscn")
+#onready var kunai = preload("res://kunaibeta.tscn")
 
 var velocidad_maxima = Vector3()
+
+#func oxigeno():
+#	if nivel_oxigeno < 100:
+#		yield(get_tree().create_timer(1), "timeout")
+#
+#		nivel_oxigeno += regen_oxigeno
+#		print(nivel_oxigeno)
+	
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -57,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	velocidad_maxima.y -= gravedad
 	if Input.is_action_pressed("salto ") and is_on_floor():
 		velocidad_maxima.y += fuerza_de_salto
+		
 	direccion = direccion.normalized()
 	
 
