@@ -62,6 +62,11 @@ func oxigeno(InDelta):
 	else:
 		poco_oxigeno = false
 		se_puede_disparar = true
+		
+	if nivel_oxigeno < 30:
+		velocidad_disparo = 0.5
+	else:
+		velocidad_disparo = 0.2
 
 
 

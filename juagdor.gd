@@ -9,7 +9,6 @@ export var mana = 100
 export var almas = 0
 export var tiempo_recoil = 0.3
 
-
 var rotacion_y = 0
 const movimiento_arma = 30
 
