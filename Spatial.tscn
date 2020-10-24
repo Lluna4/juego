@@ -9,13 +9,13 @@
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.0100397, 1.17199, 1.04724 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.976471, 0.0117647, 0.0117647, 1 )
 
-[sub_resource type="CapsuleMesh" id=3]
-material = SubResource( 5 )
+[sub_resource type="CapsuleMesh" id=4]
+material = SubResource( 3 )
 
-[sub_resource type="CapsuleShape" id=4]
+[sub_resource type="CapsuleShape" id=5]
 radius = 1.09771
 
 [sub_resource type="GIProbeData" id=6]
@@ -108,13 +108,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0961869, -0.0182626, -14.96
 
 [node name="MeshInstance" type="MeshInstance" parent="enemigo2"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.56483, 0.016083, 4.20501 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 skin = ExtResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="enemigo2"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.48773, 0.0481905, 4.23504 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="enemigo3" type="StaticBody" parent="." groups=[
 "enemigos",
@@ -123,12 +123,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.357, 0, 9.88277 )
 
 [node name="MeshInstance" type="MeshInstance" parent="enemigo3"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.56483, 0.016083, 4.20501 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="enemigo3"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.48773, 0.0481905, 4.23504 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="enemigo4" type="StaticBody" parent="." groups=[
 "enemigos",
@@ -137,12 +137,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2087, 2.52145, -1.24737 )
 
 [node name="MeshInstance" type="MeshInstance" parent="enemigo4"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.56483, 0.016083, 4.20501 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="enemigo4"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5.48773, 0.0481905, 4.23504 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="algo" type="Control" parent="."]
 anchor_right = 1.0

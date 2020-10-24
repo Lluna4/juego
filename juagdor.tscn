@@ -34,7 +34,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00983763, 0.322093, 0 )
 
 [node name="disparo" type="RayCast" parent="cabeza/Camera"]
 enabled = true
-cast_to = Vector3( 0, 0, -100 )
+cast_to = Vector3( 0, 0, -1e+06 )
 
 [node name="interaccion" type="RayCast" parent="cabeza/Camera"]
 enabled = true

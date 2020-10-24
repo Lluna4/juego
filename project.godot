@@ -55,7 +55,7 @@ settings/visual_script/max_call_stack=100000
 
 window/size/width=1360
 window/size/height=768
-window/size/fullscreen=true
+window/size/always_on_top=true
 
 [editor_plugins]
 
